@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shubh Vivah | Royal Indian Wedding Invitation</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Great+Vibes&family=Poppins:wght@300;400;500;600&family=Rozha+One&display=swap" rel="stylesheet">
+  <!-- Tone.js for Web Audio Classical Indian Wedding Music Synthesis -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ================= FLOATING PETALS CANVAS ================= -->
+  <canvas id="petals-canvas"></canvas>
+
+  <!-- Replace the old audio button with this music player widget -->
+<div class="music-player-widget" id="music-player-widget">
+  <button id="play-pause-btn" class="gold-pill-btn" title="Play/Pause">
+    <span id="player-icon">▶️</span> <span id="track-title">Play Wedding Songs</span>
+  </button>
+  <div class="player-controls-row">
+    <button id="prev-track-btn" class="mini-player-btn" title="Previous Song">⏮️</button>
+    <button id="next-track-btn" class="mini-player-btn" title="Next Song">⏭️</button>
+  </div>
+</div>>
+
+  <!-- ================= CUSTOMIZATION DRAWER ================= -->
+  <aside id="customize-drawer" class="customize-drawer">
+    <div class="drawer-header">
+      <h3>✨ Customize Wedding Details</h3>
+      <button id="close-drawer-btn" class="close-btn">&times;</button>
+    </div>
+    <div class="drawer-body">
+      <p class="drawer-note">Edit details below to update the invitation & map live!</p>
+      <label>Groom's Name
+        <input type="text" id="input-groom" value="Gaurav Gupta" />
+      </label>
+      <label>Bride's Name
+        <input type="text" id="input-bride" value="Payal Gupta" />
+      </label>
+      <label>Groom's Parents
+        <input type="text" id="input-groom-parents" value="Smt. Sandhya & Shri Rajesh Gupta" />
+      </label>
+      <label>Bride's Parents
+        <input type="text" id="input-bride-parents" value="Smt.  & Shri  Gupta" />
+      </label>
+      <label>Wedding Date
+        <input type="text" id="input-date" value="November 24, 2026" />
+      </label>
+      <label>Wedding Venue Name
+        <input type="text" id="input-venue" value="Panchwati Guest House" />
+      </label>
+      <label>Venue City / Address (for Google Map)
+        <input type="text" id="input-map-query" value="CC66+99V, Greater Kailash, J K Puri / Jajmau, Kanpur, Uttar Pradesh 208010" />
+      </label>
+      <button id="apply-custom-btn" class="royal-action-btn full-width">Update Invitation & Map</button>
+    </div>
+  </aside>
+
+  <!-- ================= 3D ROYAL HAVELI DOOR OVERLAY ================= -->
+  <div id="door-overlay" class="door-overlay">
+    <!-- Top Marigold & Mango Leaf Toran -->
+    <div class="toran-header">
+      <svg viewBox="0 0 1200 110" preserveAspectRatio="none" class="toran-svg">
+        <defs>
+          <radialGradient id="marigoldYellow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#FFF176"/>
+            <stop offset="60%" stop-color="#FFB300"/>
+            <stop offset="100%" stop-color="#E65100"/>
+          </radialGradient>
+          <radialGradient id="marigoldOrange" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#FFD54F"/>
+            <stop offset="60%" stop-color="#FB8C00"/>
+            <stop offset="100%" stop-color="#BF360C"/>
+          </radialGradient>
+        </defs>
+        <!-- Mango Leaves Row -->
+        <g id="mango-leaves">
+          <path d="M0,0 L1200,0 L1200,22 L0,22 Z" fill="#4A0E17"/>
+          <!-- Repeated Mango Leaves & Garlands -->
+          <g fill="#2E7D32" stroke="#D4AF37" stroke-width="1">
+            <path d="M40,20 Q50,55 40,75 Q30,55 40,20 Z" />
+            <path d="M120,20 Q130,55 120,75 Q110,55 120,20 Z" />
+            <path d="M200,20 Q210,55 200,75 Q190,55 200,20 Z" />
+            <path d="M280,20 Q290,55 280,75 Q270,55 280,20 Z" />
+            <path d="M360,20 Q370,55 360,75 Q350,55 360,20 Z" />
+            <path d="M440,20 Q450,55 440,75 Q430,55 440,20 Z" />
+            <path d="M520,20 Q530,55 520,75 Q510,55 520,20 Z" />
+            <path d="M600,20 Q610,55 600,75 Q590,55 600,20 Z" />
+            <path d="M680,20 Q690,55 680,75 Q670,55 680,20 Z" />
+            <path d="M760,20 Q770,55 760,75 Q750,55 760,20 Z" />
+            <path d="M840,20 Q850,55 840,75 Q830,55 840,20 Z" />
+            <path d="M920,20 Q930,55 920,75 Q910,55 920,20 Z" />
+            <path d="M1000,20 Q1010,55 1000,75 Q990,55 1000,20 Z" />
+            <path d="M1080,20 Q1090,55 1080,75 Q1070,55 1080,20 Z" />
+            <path d="M1160,20 Q1170,55 1160,75 Q1150,55 1160,20 Z" />
+          </g>
+          <!-- Marigold Swags -->
+          <path d="M0,25 Q100,95 200,25 Q300,95 400,25 Q500,95 600,25 Q700,95 800,25 Q900,95 1000,25 Q1100,95 1200,25" fill="none" stroke="url(#marigoldOrange)" stroke-width="18" stroke-dasharray="1,18" stroke-linecap="round"/>
+          <path d="M0,18 Q100,80 200,18 Q300,80 400,18 Q500,80 600,18 Q700,80 800,18 Q900,80 1000,18 Q1100,80 1200,18" fill="none" stroke="url(#marigoldYellow)" stroke-width="16" stroke-dasharray="1,18" stroke-linecap="round"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="door-stage">
+      <!-- LEFT ROYAL DOOR -->
+      <div class="door door-left" id="door-left">
+        <div class="door-inner-frame">
+          <div class="brass-studs-row"><span></span><span></span><span></span><span></span></div>
+          <div class="carved-panel top-panel">
+            <svg viewBox="0 0 200 200" class="mandala-carving">
+              <circle cx="200" cy="100" r="85" fill="none" stroke="#D4AF37" stroke-width="3" stroke-dasharray="6,4"/>
+              <circle cx="200" cy="100" r="65" fill="none" stroke="#D4AF37" stroke-width="2"/>
+              <circle cx="200" cy="100" r="40" fill="none" stroke="#FFD700" stroke-width="2"/>
+              <path d="M200,15 L200,185 M115,100 L200,100 M140,40 L200,100 M140,160 L200,100" stroke="#D4AF37" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="carved-panel bottom-panel">
+            <div class="peacock-motif">🦚</div>
+            <p class="sanskrit-carving">शुभं भवतु</p>
+          </div>
+          <div class="brass-studs-row"><span></span><span></span><span></span><span></span></div>
+          <!-- Ornate Brass Ring Knocker -->
+          <div class="door-handle left-handle">
+            <div class="handle-base"></div>
+            <div class="handle-ring"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT ROYAL DOOR -->
+      <div class="door door-right" id="door-right">
+        <div class="door-inner-frame">
+          <div class="brass-studs-row"><span></span><span></span><span></span><span></span></div>
+          <div class="carved-panel top-panel">
+            <svg viewBox="0 0 200 200" class="mandala-carving">
+              <circle cx="0" cy="100" r="85" fill="none" stroke="#D4AF37" stroke-width="3" stroke-dasharray="6,4"/>
+              <circle cx="0" cy="100" r="65" fill="none" stroke="#D4AF37" stroke-width="2"/>
+              <circle cx="0" cy="100" r="40" fill="none" stroke="#FFD700" stroke-width="2"/>
+              <path d="M0,15 L0,185 M0,100 L85,100 M0,100 L60,40 M0,100 L60,160" stroke="#D4AF37" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="carved-panel bottom-panel">
+            <div class="peacock-motif">🦚</div>
+            <p class="sanskrit-carving">मंगलम्</p>
+          </div>
+          <div class="brass-studs-row"><span></span><span></span><span></span><span></span></div>
+          <!-- Ornate Brass Ring Knocker -->
+          <div class="door-handle right-handle">
+            <div class="handle-base"></div>
+            <div class="handle-ring"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CENTER ROYAL SEAL & OPEN BUTTON -->
+      <div class="door-center-plaque" id="door-center-plaque">
+        <div class="plaque-glow"></div>
+        <div class="plaque-card">
+          <p class="shloka-small">॥ श्री गणेशाय नमः ॥</p>
+          <h1 class="plaque-title">Shubh Vivah</h1>
+          <p class="plaque-couple">
+            <span class="dyn-groom">Gaurav</span>
+            <span class="weds-amp">&amp;</span>
+            <span class="dyn-bride">Kajal</span>
+          </p>
+          <p class="plaque-subtitle">Gupta Family Wedding Invitation</p>
+          <button id="open-doors-btn" class="open-doors-btn">
+            <span class="btn-sparkle">🪔</span>
+            Tap to Open Doors &amp; Play Music
+            <span class="btn-sparkle">🪔</span>
+          </button>
+          <small class="sound-hint">🎵 Best experienced with sound enabled</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MAIN WEDDING WEBSITE ================= -->
+  <main id="main-content" class="main-content">
+
+    <!-- 1. HERO SECTION: GANESH INVOCATION & ROYAL JHAROKHA -->
+    <section class="hero-section">
+      <div class="mandala-bg-spin"></div>
+
+      <div class="container hero-container">
+        <!-- Lord Ganesha SVG Emblem -->
+        <div class="ganesh-invocation reveal-up">
+          <div class="ganesh-emblem">
+            <svg viewBox="0 0 120 120" width="85" height="85">
+              <circle cx="60" cy="60" r="54" fill="#5A0B18" stroke="#D4AF37" stroke-width="3"/>
+              <circle cx="60" cy="60" r="48" fill="none" stroke="#FFD700" stroke-width="1" stroke-dasharray="4,3"/>
+              <!-- Stylized Golden Ganesha / Om -->
+              <text x="50%" y="56%" dominant-baseline="middle" text-anchor="middle" fill="#FFD700" font-size="48" font-family="Rozha One, serif">ॐ</text>
+              <path d="M35,28 L60,15 L85,28" fill="none" stroke="#FFD700" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <p class="sanskrit-mantra">॥ वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ । निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा ॥</p>
+          <p class="mantra-translation">With the divine blessings of Lord Ganesha, we invite you to celebrate our union</p>
+        </div>
+
+        <!-- Royal Rajasthani Jharokha Arch Frame -->
+        <div class="jharokha-frame reveal-up">
+          <div class="jharokha-top-dome">
+            <span>❈</span> <span>⚜</span> <span>❈</span>
+          </div>
+          <div class="jharokha-inner">
+            <p class="royal-tag">THE ROYAL UNION OF</p>
+            <h1 class="couple-hero-names">
+              <span class="dyn-groom">Gaurav</span>
+              <span class="heart-divider">❦</span>
+              <span class="dyn-bride">Kajal</span>
+            </h1>
+            <div class="auspicious-date-badge">
+              <span class="calendar-icon">📅</span>
+              <span class="dyn-date">November 24, 2026</span>
+            </div>
+            <p class="venue-tagline">
+              📍 <span class="dyn-venue">Panchwati Guest House (Jajmau) Kanpur</span>
+            </p>
+
+            <!-- Flickering Diyas Row -->
+            <div class="diyas-row">
+              <div class="diya">
+                <div class="flame"></div>
+                <div class="diya-bowl"></div>
+              </div>
+              <div class="diya">
+                <div class="flame"></div>
+                <div class="diya-bowl"></div>
+              </div>
+              <div class="diya">
+                <div class="flame"></div>
+                <div class="diya-bowl"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a href="#family-procession" class="scroll-down-indicator">
+          <span>Witness the Royal Baraat &amp; Family Welcome</span>
+          <div class="chevron-down">⌄</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- 2. GROOM, BRIDE & FAMILIES COMING TOGETHER (BARAAT & MILNI SCENE) -->
+    <section id="family-procession" class="procession-section">
+      <div class="section-border-top"></div>
+      <div class="container">
+        <div class="section-heading reveal-up">
+          <span class="hindi-badge">॥ बारात एवं परिवार स्वागतम् ॥</span>
+          <h2>Two Families, One Sacred Bond</h2>
+          <p>With folded hands and joyful hearts, the Groom, Bride, and both our families welcome your family to bless this auspicious union.</p>
+        </div>
+
+        <!-- ANIMATED CULTURAL STAGE: GROOM FAMILY + COUPLE + BRIDE FAMILY -->
+        <div class="baraat-stage-card reveal-up">
+          <!-- Hanging Marigold Garlands inside Stage -->
+          <div class="stage-garlands">
+            <div class="garland-loop"></div>
+            <div class="garland-loop"></div>
+            <div class="garland-loop"></div>
+            <div class="garland-loop"></div>
+          </div>
+
+          <div class="procession-grid">
+            <!-- LEFT: GROOM'S FAMILY (BARAAT SIDE) -->
+            <div class="family-group groom-side-group">
+              <div class="group-ribbon">वर पक्ष • Groom's Family</div>
+              <div class="character-stage">
+                <!-- SVG Illustration of Groom's Parents & Dhol Player welcoming with Namaste -->
+                <svg viewBox="0 0 280 240" class="cultural-svg">
+                  <!-- Dholak Player -->
+                  <g class="svg-bouncer" style="animation-delay: 0.1s">
+                    <circle cx="55" cy="75" r="18" fill="#F3C69F"/>
+                    <!-- Pagdi (Turban) -->
+                    <path d="M35,70 Q55,42 75,68 Q65,55 35,70 Z" fill="#FF6F00"/>
+                    <circle cx="70" cy="55" r="6" fill="#FFD700"/>
+                    <!-- Kurta -->
+                    <path d="M32,95 L78,95 L84,185 L26,185 Z" fill="#8B0000" stroke="#D4AF37" stroke-width="2"/>
+                    <!-- Hanging Dhol Drum -->
+                    <ellipse cx="55" cy="145" rx="28" ry="18" fill="#D7CCC8" stroke="#5D4037" stroke-width="4"/>
+                    <line x1="35" y1="130" x2="75" y2="160" stroke="#D4AF37" stroke-width="2"/>
+                    <line x1="35" y1="160" x2="75" y2="130" stroke="#D4AF37" stroke-width="2"/>
+                  </g>
+
+                  <!-- Groom's Father (Sherwani + Safa + Namaste Hands) -->
+                  <g class="svg-bouncer" style="animation-delay: 0.3s">
+                    <circle cx="135" cy="68" r="20" fill="#F3C69F"/>
+                    <!-- Royal Safa -->
+                    <path d="M112,62 Q135,32 160,60 L155,70 L115,70 Z" fill="#C2185B"/>
+                    <path d="M145,45 Q160,25 170,40" fill="none" stroke="#FFD700" stroke-width="3"/>
+                    <!-- Sherwani -->
+                    <path d="M108,90 L162,90 L168,205 L102,205 Z" fill="#FFF8E7" stroke="#D4AF37" stroke-width="2.5"/>
+                    <!-- Stole -->
+                    <path d="M112,90 Q135,140 158,90" fill="none" stroke="#C2185B" stroke-width="6"/>
+                    <!-- Folded Namaste Hands -->
+                    <path d="M128,125 L135,108 L142,125 Z" fill="#F3C69F" stroke="#8D6E63" stroke-width="1.5"/>
+                  </g>
+
+                  <!-- Groom's Mother (Royal Silk Saree + Namaste) -->
+                  <g class="svg-bouncer" style="animation-delay: 0.5s">
+                    <circle cx="215" cy="74" r="19" fill="#F5CBA7"/>
+                    <!-- Bindi & Maang Tikka -->
+                    <circle cx="215" cy="68" r="2.5" fill="#D50000"/>
+                    <circle cx="215" cy="58" r="3" fill="#FFD700"/>
+                    <!-- Saree Drape -->
+                    <path d="M190,94 L240,94 L248,205 L182,205 Z" fill="#AD1457" stroke="#FFD700" stroke-width="2"/>
+                    <path d="M190,94 L242,165 L230,205 L185,130 Z" fill="#FFD700" opacity="0.85"/>
+                    <!-- Folded Namaste Hands -->
+                    <path d="M208,128 L215,112 L222,128 Z" fill="#F5CBA7" stroke="#8D6E63" stroke-width="1.5"/>
+                  </g>
+                </svg>
+              </div>
+              <div class="family-names-box">
+                <h4><span class="dyn-groom-parents">Smt. Sandhya &amp; Shri Rajesh Gupta</span></h4>
+                <p>“With immense joy, the Gupta Parivar welcomes your family with open arms!”</p>
+              </div>
+            </div>
+
+            <!-- CENTER: GROOM & BRIDE UNDER PHOOLON KI CHAADAR -->
+            <div class="couple-center-stage">
+              <div class="chaadar-canopy">
+                <span>🌸</span><span>🌼</span><span>🌺</span><span>🌼</span><span>🌸</span>
+              </div>
+              <div class="couple-svg-wrapper">
+                <svg viewBox="0 0 260 250" class="cultural-svg couple-main-svg">
+                  <!-- Golden Aura Halo Behind Couple -->
+                  <circle cx="130" cy="120" r="95" fill="url(#coupleGlow)" opacity="0.35"/>
+                  <defs>
+                    <radialGradient id="coupleGlow">
+                      <stop offset="0%" stop-color="#FFD700"/>
+                      <stop offset="100%" stop-color="transparent"/>
+                    </radialGradient>
+                  </defs>
+
+                  <!-- GROOM -->
+                  <g class="couple-float">
+                    <!-- Head -->
+                    <circle cx="95" cy="72" r="22" fill="#F5CBA7"/>
+                    <!-- Royal Kalgi Turban (Safa) -->
+                    <path d="M70,66 Q95,30 122,64 L118,74 L72,74 Z" fill="#800020" stroke="#FFD700" stroke-width="2"/>
+                    <circle cx="105" cy="48" r="5" fill="#FFD700"/>
+                    <path d="M105,48 Q120,25 128,42" fill="none" stroke="#FFF8E7" stroke-width="3"/>
+                    <!-- Smile & Tilak -->
+                    <line x1="95" y1="60" x2="95" y2="67" stroke="#FF3D00" stroke-width="2.5"/>
+                    <path d="M89,80 Q95,85 101,80" fill="none" stroke="#5D4037" stroke-width="2"/>
+                    <!-- Royal Cream & Gold Sherwani -->
+                    <path d="M66,96 L124,96 L132,225 L58,225 Z" fill="#FFFDF5" stroke="#D4AF37" stroke-width="3"/>
+                    <!-- Emerald & Pearl Haar (Necklace) -->
+                    <path d="M78,96 Q95,128 112,96" fill="none" stroke="#00897B" stroke-width="4" stroke-dasharray="4,3"/>
+                    <path d="M74,96 Q95,140 116,96" fill="none" stroke="#D4AF37" stroke-width="3"/>
+                    <!-- Rose & Jasmine Varmala (Garland) -->
+                    <path d="M72,100 Q95,155 118,100" fill="none" stroke="#C62828" stroke-width="9" stroke-dasharray="6,4" stroke-linecap="round"/>
+                  </g>
+
+                  <!-- BRIDE -->
+                  <g class="couple-float" style="animation-delay: 0.4s">
+                    <!-- Bridal Dupatta Veil -->
+                    <path d="M140,48 Q170,35 198,52 L212,190 L135,190 Z" fill="#880E4F" opacity="0.45"/>
+                    <!-- Head -->
+                    <circle cx="168" cy="78" r="21" fill="#F5CBA7"/>
+                    <!-- Matha Patti & Maang Tikka -->
+                    <path d="M147,70 Q168,55 189,70" fill="none" stroke="#FFD700" stroke-width="3"/>
+                    <circle cx="168" cy="65" r="4" fill="#FFD700"/>
+                    <circle cx="168" cy="72" r="2.5" fill="#B71C1C"/>
+                    <!-- Nath (Bridal Nose Ring) -->
+                    <circle cx="160" cy="82" r="5" fill="none" stroke="#FFD700" stroke-width="1.8"/>
+                    <path d="M153,80 Q168,86 174,80" fill="none" stroke="#5D4037" stroke-width="2"/>
+                    <!-- Royal Crimson Bridal Lehenga -->
+                    <path d="M142,100 L194,100 L215,225 L125,225 Z" fill="#9B002C" stroke="#FFD700" stroke-width="3"/>
+                    <!-- Golden Zari Embroidery Lines -->
+                    <line x1="130" y1="210" x2="210" y2="210" stroke="#FFD700" stroke-width="4" stroke-dasharray="8,4"/>
+                    <line x1="134" y1="195" x2="206" y2="195" stroke="#FFD700" stroke-width="2"/>
+                    <!-- Bridal Kundan Choker -->
+                    <path d="M152,100 Q168,120 184,100" fill="none" stroke="#FFD700" stroke-width="6"/>
+                    <!-- Varmala (Garland) -->
+                    <path d="M148,104 Q168,155 188,104" fill="none" stroke="#C62828" stroke-width="9" stroke-dasharray="6,4" stroke-linecap="round"/>
+                  </g>
+                </svg>
+              </div>
+              <div class="couple-invitation-quote">
+                <span class="namaste-hands">🙏</span>
+                <p>“Together with our parents, we warmly invite you and your beloved family to join our wedding festivities!”</p>
+                <button id="celebrate-shower-btn" class="royal-action-btn">
+                  🥁 Beat the Dhol &amp; Shower Petals!
+                </button>
+              </div>
+            </div>
+
+            <!-- RIGHT: BRIDE'S FAMILY (SWAGATAM SIDE) -->
+            <div class="family-group bride-side-group">
+              <div class="group-ribbon">वधू पक्ष • Bride's Family</div>
+              <div class="character-stage">
+                <svg viewBox="0 0 280 240" class="cultural-svg">
+                  <!-- Bride's Mother holding Aarti Thali -->
+                  <g class="svg-bouncer" style="animation-delay: 0.2s">
+                    <circle cx="65" cy="74" r="19" fill="#F5CBA7"/>
+                    <circle cx="65" cy="68" r="2.5" fill="#D50000"/>
+                    <path d="M40,94 L90,94 L98,205 L32,205 Z" fill="#00695C" stroke="#FFD700" stroke-width="2"/>
+                    <path d="M40,94 L92,165 L80,205 L35,130 Z" fill="#FFD700" opacity="0.8"/>
+                    <!-- Golden Aarti Thali with Lit Diya -->
+                    <ellipse cx="65" cy="132" rx="22" ry="7" fill="#FFD700" stroke="#B71C1C" stroke-width="2"/>
+                    <path d="M62,125 Q65,112 68,125 Z" fill="#FF6D00"/>
+                  </g>
+
+                  <!-- Bride's Father (Bandhgala + Safa + Namaste) -->
+                  <g class="svg-bouncer" style="animation-delay: 0.4s">
+                    <circle cx="145" cy="68" r="20" fill="#F3C69F"/>
+                    <path d="M122,62 Q145,32 170,60 L165,70 L125,70 Z" fill="#E65100"/>
+                    <path d="M118,90 L172,90 L178,205 L112,205 Z" fill="#4A0E17" stroke="#D4AF37" stroke-width="2.5"/>
+                    <path d="M138,125 L145,108 L152,125 Z" fill="#F3C69F" stroke="#8D6E63" stroke-width="1.5"/>
+                  </g>
+
+                  <!-- Bride's Sister Throwing Flower Petals -->
+                  <g class="svg-bouncer" style="animation-delay: 0.6s">
+                    <circle cx="220" cy="78" r="17" fill="#F5CBA7"/>
+                    <path d="M198,96 L242,96 L252,205 L188,205 Z" fill="#F57F17" stroke="#FFD700" stroke-width="2"/>
+                    <!-- Flower Basket -->
+                    <ellipse cx="215" cy="130" rx="16" ry="9" fill="#8D6E63" stroke="#FFD700" stroke-width="1.5"/>
+                    <circle cx="210" cy="126" r="4" fill="#FF1744"/>
+                    <circle cx="218" cy="125" r="4" fill="#FFEA00"/>
+                    <circle cx="223" cy="127" r="4" fill="#FF9100"/>
+                  </g>
+                </svg>
+              </div>
+              <div class="family-names-box">
+                <h4><span class="dyn-bride-parents">Smt.  &amp; Shri Gupta</span></h4>
+                <p>“अतिथि देवो भव: — The Gupta Parivar awaits your gracious presence &amp; blessings!”</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CORDIAL FAMILY INVITATION SCROLL -->
+        <div class="royal-farmaan-scroll reveal-up">
+          <div class="scroll-roller top-roller"></div>
+          <div class="scroll-parchment">
+            <p class="farmaan-salutation">॥ स्नेहिल निमंत्रण • A Cordial Family Invitation ॥</p>
+            <h3>Dear Family &amp; Friends,</h3>
+            <p class="farmaan-body">
+              Marriages are made in heaven, and celebrated on earth with the warmth of loved ones.
+              <strong><span class="dyn-groom-parents">Smt. Sandhya &amp; Shri Rajesh Gupta</span></strong>
+              together with
+              <strong><span class="dyn-bride-parents">Smt.  &amp; Shri Gupta</span></strong>
+              request the honour of your presence with your entire family on the auspicious occasion of the wedding ceremony of their beloved children
+            </p>
+            <div class="farmaan-couple-highlight">
+              <span class="dyn-groom">Gaurav</span> &amp; <span class="dyn-bride">Kajal</span>
+            </div>
+            <p class="farmaan-footer">
+              <em>“Your presence and blessings are the greatest gift to our families.”</em>
+            </p>
+          </div>
+          <div class="scroll-roller bottom-roller"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. AUSPICIOUS WEDDING CEREMONIES (COLORFUL INDIAN CULTURE) -->
+    <section class="events-section">
+      <div class="container">
+        <div class="section-heading reveal-up">
+          <span class="hindi-badge">॥ मांगलिक कार्यक्रम ॥</span>
+          <h2>Vibrant Colours of Celebration</h2>
+          <p>Each ceremony is steeped in Indian heritage, music, and joyous family traditions.</p>
+        </div>
+
+        <div class="events-grid">
+          <!-- Haldi -->
+          <article class="event-card haldi-theme reveal-up">
+            <div class="event-icon">🌼</div>
+            <span class="event-tag">Golden Glow</span>
+            <h3>Haldi Rasam</h3>
+            <p class="event-time">November 23, 2026 • 10:00 AM</p>
+            <p class="event-desc">An auspicious morning of turmeric blessings, marigold showers, dhol beats, and yellow hues.</p>
+            <span class="dress-code">Dress Code: Sunshine Yellow</span>
+          </article>
+
+          <!-- Mehendi -->
+          <article class="event-card mehendi-theme reveal-up">
+            <div class="event-icon">🌿</div>
+            <span class="event-tag">Henna &amp; Folk Songs</span>
+            <h3>Mehendi &amp; Sangeet</h3>
+            <p class="event-time">November 23, 2026 • 06:00 PM</p>
+            <p class="event-desc">Intricate henna patterns paired with folk Banna-Banni melodies and family dance performances.</p>
+            <span class="dress-code">Dress Code: Emerald Green &amp; Gold</span>
+          </article>
+
+          <!-- Baraat -->
+          <article class="event-card baraat-theme reveal-up">
+            <div class="event-icon">🐎</div>
+            <span class="event-tag">Royal Procession</span>
+            <h3>Swagat &amp; Baraat</h3>
+            <p class="event-time"><span class="dyn-date">November 24, 2026</span> • 05:00 PM</p>
+            <p class="event-desc">Grand arrival of the Groom with family, brass band, vintage carriage, and Milni ceremony.</p>
+            <span class="dress-code">Dress Code: Royal Ethnic / Jodhpuri</span>
+          </article>
+
+          <!-- Shubh Muhurat / Pheras -->
+          <article class="event-card vivah-theme reveal-up">
+            <div class="event-icon">🔥</div>
+            <span class="event-tag">Sacred Seven Vows</span>
+            <h3>Varmala &amp; Saptapadi</h3>
+            <p class="event-time"><span class="dyn-date">November 24, 2026</span> • 08:30 PM</p>
+            <p class="event-desc">Exchange of floral garlands under the starlit mandap followed by sacred Saat Pheras &amp; Royal Feast.</p>
+            <span class="dress-code">Dress Code: Crimson, Maroon &amp; Silk</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. WEDDING LOCATION & INTERACTIVE MAP SECTION -->
+    <section id="venue-map-section" class="map-section">
+      <div class="container">
+        <div class="section-heading reveal-up">
+          <span class="hindi-badge">॥ शुभ विवाह स्थल एवं मार्गदर्शिका ॥</span>
+          <h2>Wedding Destination</h2>
+          <p>Follow the royal route to join our families in celebration.</p>
+        </div>
+
+        <!-- Illustrated Route Journey Banner -->
+        <div class="route-landmark-banner reveal-up">
+          <div class="landmark-step">
+            <span class="lm-icon">✈️</span>
+            <div>
+              <strong>Airport / Station</strong>
+              <small>Royal Pickup Carriages Available</small>
+            </div>
+          </div>
+          <div class="landmark-dashed-line"></div>
+          <div class="landmark-step">
+            <span class="lm-icon">🐘</span>
+            <div>
+              <strong>Baraat Assembly Gate</strong>
+              <small>Surajpol Courtyard Entrance</small>
+            </div>
+          </div>
+          <div class="landmark-dashed-line"></div>
+          <div class="landmark-step active-dest">
+            <span class="lm-icon">🏰</span>
+            <div>
+              <strong class="dyn-venue">Panchwati Guest House (Jajmau) Kanpur</strong>
+              <small>Main Royal Mandap Lawn</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Map & Venue Details Card -->
+        <div class="venue-map-grid reveal-up">
+          <div class="venue-info-card">
+            <div class="palace-badge">🏰 ROYAL VENUE</div>
+            <h3 class="dyn-venue">Panchwati Guest House (Jajmau) Kanpur</h3>
+            <p class="venue-address" id="display-map-address">
+              Rambagh Palace, Bhawani Singh Rd, Jaipur, Rajasthan
+            </p>
+            <div class="venue-highlights">
+              <div class="vh-item">
+                <span>🗓️</span>
+                <div>
+                  <strong>Auspicious Date</strong>
+                  <p class="dyn-date">November 24, 2026</p>
+                </div>
+              </div>
+              <div class="vh-item">
+                <span>🕰️</span>
+                <div>
+                  <strong>Baraat &amp; Reception</strong>
+                  <p>5:00 PM Onwards</p>
+                </div>
+              </div>
+              <div class="vh-item">
+                <span>🚗</span>
+                <div>
+                  <strong>Valet &amp; Hospitality</strong>
+                  <p>Ramadevi Kanpur </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="venue-cta-group">
+              <a id="google-maps-direct-link"
+                 href="https://www.google.com/maps/search/?api=1&query=Rambagh+Palace+Jaipur+Rajasthan"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 class="royal-action-btn">
+                🧭 Open in Google Maps Navigation
+              </a>
+              <button id="copy-address-btn" class="gold-outline-btn">
+                📋 Copy Venue Address
+              </button>
+            </div>
+          </div>
+
+          <div class="map-frame-wrapper">
+            <div class="map-corner-ornament tl"></div>
+            <div class="map-corner-ornament tr"></div>
+            <div class="map-corner-ornament bl"></div>
+            <div class="map-corner-ornament br"></div>
+            <iframe
+              id="venue-map-iframe"
+              title="Wedding Venue Location Map"
+              src="https://www.google.com/maps/dir//Panchwati+Guest+House,+CC66%2B99V,+Greater+Kailash,+J+K+Puri,+Kanpur,+Uttar+Pradesh+208010/@26.474425,80.3345293,14z/data=!4m8!4m7!1m0!1m5!1m1!1s0x399c41a76be25b2f:0x64eb5c9bba10137f!2m2!1d80.4109391!2d26.4109779?entry=ttu&g_ep=EgoyMDI2MTAyMC4wIKXMDSoASAFQAw%3D%3D"
+              loading="lazy"
+              allowfullscreen
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. FAMILY RSVP & BLESSINGS WALL -->
+    <section class="rsvp-section">
+      <div class="container">
+        <div class="rsvp-card reveal-up">
+          <span class="hindi-badge">॥ दर्शनाभिलाषी ॥</span>
+          <h2>Send Your Family's Blessings &amp; RSVP</h2>
+          <p>Let both families know you are coming so we can welcome your family in true Indian tradition!</p>
+
+          <form id="rsvp-form" class="rsvp-form">
+            <div class="form-row">
+              <input type="text" id="rsvp-name" placeholder="Your Name / Family Name (e.g., Gupta Family)" required />
+              <select id="rsvp-guests">
+                <option value="With Entire Family (4+ Guests)">Attending with Entire Family (4+)</option>
+                <option value="Couple (2 Guests)">Attending as Couple (2)</option>
+                <option value="Solo (1 Guest)">Attending Solo (1)</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <select id="rsvp-side">
+                <option value="Both Families">Guest of Both Families</option>
+                <option value="Groom's Family">Guest of Groom's Family (वर पक्ष)</option>
+                <option value="Bride's Family">Guest of Bride's Family (वधू पक्ष)</option>
+              </select>
+              <input type="text" id="rsvp-message" placeholder="Write a blessing for the Bride & Groom..." required />
+            </div>
+            <button type="submit" class="royal-action-btn">🙏 Confirm Attendance &amp; Shower Blessings</button>
+          </form>
+
+          <!-- Live Blessings Wall -->
+          <div id="blessings-wall" class="blessings-wall">
+            <div class="blessing-pill">
+              <strong>🌸 Gupta Parivar (Lal bangla):</strong> “Heartiest congratulations to both families! Can't wait for the Baraat!”
+            </div>
+            <div class="blessing-pill">
+              <strong>🪔 Vishnoi Family (Kakadeo):</strong> “May Lord Ganesha bless Gaurav &amp; Kajal with eternal happiness!”
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="royal-footer">
+      <div class="container">
+        <p class="footer-sanskrit">॥ सर्वमंगल मांगल्ये शिवे सर्वार्थ साधिके ॥</p>
+        <h3 class="footer-couple"><span class="dyn-groom">Gaurav</span> &amp; <span class="dyn-bride">Kajal</span></h3>
+        <p class="footer-families">Awaiting your warm presence — The Gupta Families</p>
+        <!-- Custom Credit Signature -->
+      <div class="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-maroon-900/90 border border-royalGold-500/40 shadow-lg mt-2">
+        <span class="text-xs text-gray-300">Created with ❤️ by</span>
+        <span class="font-royal text-sm font-bold text-royalGold-400 tracking-wider">Rishi and Aparna</span>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- Custom Script -->
+  <script src="js/script.js"></script>
+</body>
+</html>
